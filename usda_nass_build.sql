@@ -1,5 +1,5 @@
 -- create table of all text types for loading flexilibity
-CREATE TABLE indigo.crops_demo (
+CREATE TABLE crops_demo (
   ID SERIAL PRIMARY KEY,
   SOURCE_DESC text, 
   SECTOR_DESC text, 
@@ -43,7 +43,7 @@ CREATE TABLE indigo.crops_demo (
 );
 
 -- copy in data from tsv file
-COPY indigo.crops_demo (
+COPY crops_demo (
   SOURCE_DESC, 
   SECTOR_DESC, 
   GROUP_DESC, 
@@ -88,14 +88,14 @@ FROM '/Users/jsobel/Desktop/crops.txt'
 DELIMITER E'\t';
 
 -- remove headers (probably doable in previou step)
-delete from indigo.crops_demo where id = 1;
+delete from crops_demo where id = 1;
 
 -- create copy of table structure for additional cleaning
-create table indigo.crops_ltd (like indigo.crops_demo including all)
+create table crops_ltd (like crops_demo including all)
 
 -- bringing together all the filter steps...
-insert into indigo.crops_ltd
-  select * from indigo.crops_demo
+insert into crops_ltd
+  select * from crops_demo
   where commodity_desc in ('CORN', 'COTTON', 'RICE', 'SOYBEANS', 'WHEAT')
     and statisticcat_desc in ('AREA HARVESTED', 'AREA PLANTED', 'PRODUCTION', 'YIELD')
     and year >= '1990'
@@ -123,7 +123,7 @@ insert into indigo.crops_ltd
     );
 
 -- create reduced/renamed column space 
-create table indigo.crops_cleaned (
+create table crops_cleaned (
   id SERIAL PRIMARY KEY,
   year integer,
   state_name text,
@@ -138,7 +138,7 @@ create table indigo.crops_cleaned (
   value decimal
 );
 
-insert into indigo.crops_cleaned (
+insert into crops_cleaned (
   year,
   state_name,
   county_name,
@@ -162,7 +162,7 @@ select year::int as year,
        statisticcat_desc as measurement_type,
        unit_desc as measurement_units,
        replace(value, ',', '')::decimal as value
-from indigo.crops_ltd;
+from crops_ltd;
 
 -- copy out to file for tableau linking
-COPY indigo.crops_cleaned to '/Users/jsobel/Desktop/crops_cleaned.csv' csv header;
+COPY crops_cleaned to '/Users/jsobel/Desktop/crops_cleaned.csv' csv header;

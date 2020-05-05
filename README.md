@@ -9,4 +9,5 @@ Source File: "qs.crops_yyyymmdd.txt.gz" (with recent date replacing yyyymmdd)
 The output data is visualized accessible in this Tableau Public dashboard.
 
 https://public.tableau.com/profile/jay1053#!/vizhome/USDANASSDashboard/USDANASSCountyCropYearlySurveys
-Data Disclaimer: I'm an amateur and may have made mistakes in this process.
+
+Data Disclaimer: I am not an expert on this data source and may be mis representing it.

@@ -195,14 +195,12 @@ from crops_ltd;
 COPY crops_cleaned to '/Users/jsobel/Desktop/crops_cleaned.csv' csv header;
 
 
+create table indigo.crops_cleaned_sample (like indigo.crops_cleaned including all);
 
+insert into indigo.crops_cleaned_sample
+select *
+from indigo.crops_cleaned
+order by random()
+limit 1000;
 
-select 
-
-from crops_ltd
-
-where year between '2005' and '2015'
-  and commodity_desc = 'CORN'
-  
-
-
+COPY indigo.crops_cleaned_sample to '/Users/jsobel/Desktop/crops_cleaned_sample.csv' csv header;

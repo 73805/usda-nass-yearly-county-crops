@@ -6,7 +6,7 @@ USDA NASS FTP: ftp://ftp.nass.usda.gov/quickstats/
 
 Source File: "qs.crops_yyyymmdd.txt.gz" (with recent date replacing yyyymmdd)
 
-The output data is visualized accessible in this Tableau Public dashboard.
+I made a quick dashboard of counties and yearly trends by crop in Tableau Public.
 
 https://public.tableau.com/profile/jay1053#!/vizhome/USDANASSDashboard/USDANASSCountyCropYearlySurveys
 
